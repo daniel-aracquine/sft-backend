@@ -25,7 +25,7 @@ router.post("/users/signup/:is",async(req,res) => {
                 email:req.body.email
             })
         } catch (e) {
-            res.status(401).send(e)
+            res.status(500).send(e)
         }
     } else {
         try {
@@ -45,7 +45,7 @@ router.post("/users/signup/:is",async(req,res) => {
                 email:req.body.email
             })
         } catch (e) {
-            res.status(401).send(e)
+            res.status(500).send(e)
         }
     }
 })
@@ -146,7 +146,7 @@ router.patch("/users/updateProfile",auth,async(req, res) => {
             email:req.user.email
         })
     } catch (e) {
-        res.status(400).send(e)
+        res.status(500).send(e)
     }
 })
 
