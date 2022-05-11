@@ -4,9 +4,17 @@ const jwt = require("jsonwebtoken");
 
 const chatSchema = new mongoose.Schema(
   {
+    chatName:{
+        type:String
+    },
     faculty:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Faculty'
+        id:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Faculty'
+        },
+        name:{
+            type:String
+        }
     },
     internship:{
         type:mongoose.Schema.Types.ObjectId,
@@ -14,19 +22,33 @@ const chatSchema = new mongoose.Schema(
     },
     students:[
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'Student'
+            
+                id:{
+                    type:mongoose.Schema.Types.ObjectId,
+                    ref:'Student'
+                },
+                name:{
+                    type:String
+                }
+            
         }
     ],
     messages:[
         {
-            by:{
-                type:mongoose.Schema.Types.ObjectId,
-                ref:'Student'
-            },
-            message:{
-                type:String,
-            }
+            
+                by:{
+                    type:mongoose.Schema.Types.ObjectId,
+                },
+                isFaculty:{
+                    type:Boolean,
+                },
+                byName:{
+                    type:String
+                },
+                message:{
+                    type:String,
+                }
+            
         }
     ]
   },

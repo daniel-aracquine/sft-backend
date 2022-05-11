@@ -5,6 +5,7 @@ const Student = require('../models/student')
 const Faculty = require('../models/faculty')
 const Internship = require('../models/internship')
 const User = require('../models/user')
+const Chat = require('../models/chat')
 const {auth, facultyAuth, studentAuth} = require('../middlewares/auth')
 
 router.post("/students/apply",auth,studentAuth,async(req,res)=> {
@@ -57,5 +58,16 @@ router.get("/students/internships",auth,async(req,res)=>{
     }
 })
 
+
+router.get("/students/getChats",auth,studentAuth,async(req,res)=> {
+    try {
+        const chats = await Chat.find({
+            'students.student':req.person._id
+        })
+        res.status(200).send(chats)
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
+})
 
 module.exports = router
