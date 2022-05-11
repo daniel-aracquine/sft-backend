@@ -62,7 +62,12 @@ router.get("/students/internships",auth,async(req,res)=>{
 router.get("/students/getChats",auth,studentAuth,async(req,res)=> {
     try {
         const chats = await Chat.find({
-            'students.student':req.person._id
+            "students.id":req.person._id,
+            "students.name":req.person.name
+            // {
+            //     id:req.person._id,
+            //     name:req.person.name
+            // }
         })
         res.status(200).send(chats)
     } catch (e) {
