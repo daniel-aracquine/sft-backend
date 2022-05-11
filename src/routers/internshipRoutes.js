@@ -11,13 +11,13 @@ router.get("/internships/getAll",auth,async(req,res)=> {
     try {
         const internships = await Internship.find({})
         let faculties = []
-        for(const internship of internships) {
-            const faculty = await Faculty.findById(internship.faculty)
-            faculties.push(faculty.name)
-        }
+        // for(const internship of internships) {
+        //     const faculty = await Faculty.findById(internship.faculty)
+        //     faculties.push(faculty.name)
+        // }
         res.status(200).send({
             internships,
-            faculties
+            // faculties
         })
     } catch (e) {
         res.status(500).send(e)

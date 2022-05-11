@@ -40,7 +40,7 @@ router.get("/studentProfile/:id",auth,async(req,res) => {
     }
 })
 
-router.get("/internships/:id",auth,async(req,res)=> {
+router.get("/faculties/allInternships/:id",auth,async(req,res)=> {
     try {
         const faculty = await Faculty.findById(req.params.id)
         let internships = []
