@@ -75,8 +75,7 @@ router.post("/users/login",async(req,res) => {
             email:req.body.email
         })
     } catch (e) {
-        console.log(e)
-        res.status(500).send(e)
+        res.status(e.message ? 401 : 500).send(e.message)
     }
 })
 
