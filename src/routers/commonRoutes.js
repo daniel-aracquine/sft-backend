@@ -40,4 +40,21 @@ router.get("/studentProfile/:id",auth,async(req,res) => {
     }
 })
 
+router.get("/internships/:id",auth,async(req,res)=> {
+    try {
+        const faculty = await Faculty.findById(req.params.id)
+        let internships = []
+        for(const a of faculty.internshipsOpened) {
+            const b = await Internship.findById(a.id)
+            internships.push(b)
+        }
+        res.status(200).send({
+            internshipsOpened:faculty.internshipsOpened,
+            internships
+        })
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
+})
+
 module.exports = router
