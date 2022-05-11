@@ -40,13 +40,17 @@ router.post("/students/apply",auth,studentAuth,async(req,res)=> {
 router.get("/students/internships",auth,async(req,res)=>{
     try {
         let internships = []
+        let faculties = []
         for(const internship of req.person.internships) {
             const a = await Internship.findById(internship.id)
+            const b = await Faculty.findById(a.faculty)
             internships.push(a)
+            faculties.push(b.name)
         }
         res.status(200).send({
             studentInternships:req.person.internships,
-            internships
+            internships,
+            faculties
         })
     } catch (e) {
         res.status(500).send(e)
